@@ -74,7 +74,7 @@ export const TaskListTableDefault: React.FC<{
                 if (columnVisibility.isVisible === true) {
                   if (columnVisibility.columnWithArrow === true) {
                     return (
-                      <div
+                      <div key={columnVisibility.columnName}
                         className={styles.taskListCell}
                         style={{
                           minWidth: rowWidth,

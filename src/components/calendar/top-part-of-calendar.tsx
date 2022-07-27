@@ -18,6 +18,7 @@ export const TopPartOfCalendar: React.FC<TopPartOfCalendarProps> = ({
   xText,
   yText,
 }) => {
+  console.log("TOP PART OF CALENDAR ", value);
   return (
     <g className="calendarTop">
       <line

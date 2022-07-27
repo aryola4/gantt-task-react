@@ -52,6 +52,19 @@ export const ViewSwitcher: React.FC<ViewSwitcherProps> = ({
       >
         Year
       </button>
+      <button
+        className="Button"
+        onClick={() => onViewModeChange(ViewMode.Semester)}
+      >
+        Semester
+      </button>
+      <button
+        className="Button"
+        onClick={() => onViewModeChange(ViewMode.Trimester)}
+      >
+        Trimester
+      </button>
+      
       <div className="Switch">
         <label className="Switch_Toggle">
           <input

@@ -120,6 +120,94 @@ export const Calendar: React.FC<CalendarProps> = ({
     return [topValues, bottomValues];
   };
 
+  const getCalendarValuesForSemester = () => {
+    const topValues: ReactChild[] = [];
+    const bottomValues: ReactChild[] = [];
+    const topDefaultHeight = headerHeight * 0.5;
+    for (let i = 0; i < dateSetup.dates.length; i++) {
+      const date = dateSetup.dates[i];
+      const bottomValue = getLocaleMonth(date, locale);
+      bottomValues.push(
+        <text
+          key={bottomValue + date.getFullYear()}
+          y={headerHeight * 0.8}
+          x={columnWidth * i + columnWidth * 0.5}
+          className={styles.calendarBottomText}
+        >
+          {bottomValue}
+        </text>
+      );
+      if (
+        i === 0 ||
+        date.getFullYear() !== dateSetup.dates[i - 1].getFullYear()
+      ) {
+        const topValue = date.getFullYear().toString();
+        let xText: number;
+        if (rtl) {
+          xText = (6 + i + date.getMonth() + 1) * columnWidth;
+        } else {
+          xText = (6 + i - date.getMonth()) * columnWidth;
+        }
+        topValues.push(
+          <TopPartOfCalendar
+            key={topValue}
+            value={topValue}
+            x1Line={columnWidth * i}
+            y1Line={0}
+            y2Line={topDefaultHeight}
+            xText={xText}
+            yText={topDefaultHeight * 0.9}
+          />
+        );
+      }
+    }
+    return [topValues, bottomValues];
+  };
+
+  const getCalendarValuesForTrimester = () => {
+    const topValues: ReactChild[] = [];
+    const bottomValues: ReactChild[] = [];
+    const topDefaultHeight = headerHeight * 0.5;
+    for (let i = 0; i < dateSetup.dates.length; i++) {
+      const date = dateSetup.dates[i];
+      const bottomValue = getLocaleMonth(date, locale);
+      bottomValues.push(
+        <text
+          key={bottomValue + date.getFullYear()}
+          y={headerHeight * 0.8}
+          x={columnWidth * i + columnWidth * 0.5}
+          className={styles.calendarBottomText}
+        >
+          {bottomValue}
+        </text>
+      );
+      if (
+        i === 0 ||
+        date.getFullYear() !== dateSetup.dates[i - 1].getFullYear()
+      ) {
+        const topValue = date.getFullYear().toString();
+        let xText: number;
+        if (rtl) {
+          xText = (6 + i + date.getMonth() + 1) * columnWidth;
+        } else {
+          xText = (6 + i - date.getMonth()) * columnWidth;
+        }
+        topValues.push(
+          <TopPartOfCalendar
+            key={topValue}
+            value={topValue}
+            x1Line={columnWidth * i}
+            y1Line={0}
+            y2Line={topDefaultHeight}
+            xText={xText}
+            yText={topDefaultHeight * 0.9}
+          />
+        );
+      }
+    }
+    return [topValues, bottomValues];
+  };
+
   const getCalendarValuesForWeek = () => {
     const topValues: ReactChild[] = [];
     const bottomValues: ReactChild[] = [];
@@ -206,8 +294,8 @@ export const Calendar: React.FC<CalendarProps> = ({
             xText={
               columnWidth * (i + 1) -
               getDaysInMonth(date.getMonth(), date.getFullYear()) *
-                columnWidth *
-                0.5
+              columnWidth *
+              0.5
             }
             yText={topDefaultHeight * 0.9}
           />
@@ -312,17 +400,31 @@ export const Calendar: React.FC<CalendarProps> = ({
 
   let topValues: ReactChild[] = [];
   let bottomValues: ReactChild[] = [];
+  
   switch (dateSetup.viewMode) {
+    
     case ViewMode.Year:
+      console.log("CALENDAR YEAR");
       [topValues, bottomValues] = getCalendarValuesForYear();
       break;
     case ViewMode.Month:
-        [topValues, bottomValues] = getCalendarValuesForMonth();
-        break;
-      case ViewMode.Week:
+      console.log("CALENDAR MONTH");
+      [topValues, bottomValues] = getCalendarValuesForMonth();
+      break;
+    case ViewMode.Semester:
+      console.log("CALENDAR SEMESTER");
+      [topValues, bottomValues] = getCalendarValuesForSemester();
+      break;
+    case ViewMode.Trimester:
+      console.log("CALENDAR TRIMESTER");
+      [topValues, bottomValues] = getCalendarValuesForTrimester();
+      break;
+    case ViewMode.Week:
+      console.log("CALENDAR WEEK");
       [topValues, bottomValues] = getCalendarValuesForWeek();
       break;
     case ViewMode.Day:
+      console.log("CALENDAR DAY");
       [topValues, bottomValues] = getCalendarValuesForDay();
       break;
     case ViewMode.QuarterDay:
@@ -330,8 +432,13 @@ export const Calendar: React.FC<CalendarProps> = ({
       [topValues, bottomValues] = getCalendarValuesForPartOfDay();
       break;
     case ViewMode.Hour:
+      console.log("CALENDAR HOUR");
       [topValues, bottomValues] = getCalendarValuesForHour();
   }
+
+  console.log("CALENDAR BOTTOM VALUES", topValues);
+  console.log("CALENDAR BOTTOM VALUES", bottomValues);
+
   return (
     <g className="calendar" fontSize={fontSize} fontFamily={fontFamily}>
       <rect

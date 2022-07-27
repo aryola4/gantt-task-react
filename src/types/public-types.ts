@@ -7,7 +7,11 @@ export enum ViewMode {
   Week = "Week",
   Month = "Month",
   Year = "Year",
+  Semester = "Semester",
+  Trimester = "Trimester",
+  
 }
+
 export type TaskType = "task" | "milestone" | "project";
 export interface Task {
   id: string;

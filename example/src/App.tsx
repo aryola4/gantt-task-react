@@ -1,8 +1,17 @@
 import React from "react";
-import { Task, ViewMode, Gantt } from "gantt-task-react";
+import { Task, ViewMode, Gantt, ColumnVisibility } from "gantt-task-react";
 import { ViewSwitcher } from "./components/view-switcher";
 import { getStartEndDateForProject, initTasks } from "./helper";
 import "gantt-task-react/dist/index.css";
+
+
+const COLUMNLIST: ColumnVisibility[] = [
+  { columnName: 'Code', isVisible: true, columnWithArrow: true, toShow: (task:Task) => {return task.id} },
+  { columnName: 'Nom', isVisible: true, toShow: (task:Task) => {return task.name} },
+  { columnName: 'Début', isVisible: true, isDate:true, toShow: (task:Task) => {return task.start} },
+  { columnName: 'Fin', isVisible: true, isDate:true, toShow: (task:Task) => {return task.end} },
+  { columnName: 'Assigné à', isVisible: true, toShow: (task:Task) => {return task.assignedUser} },
+];
 
 // Init
 const App = () => {
@@ -87,6 +96,7 @@ const App = () => {
         onExpanderClick={handleExpanderClick}
         listCellWidth={isChecked ? "155px" : ""}
         columnWidth={columnWidth}
+        columnList={COLUMNLIST}
       />
       <h3>Gantt With Limited Height</h3>
       <Gantt
@@ -102,6 +112,7 @@ const App = () => {
         listCellWidth={isChecked ? "155px" : ""}
         ganttHeight={300}
         columnWidth={columnWidth}
+        columnList={COLUMNLIST}
       />
     </div>
   );
