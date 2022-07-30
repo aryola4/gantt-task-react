@@ -435,6 +435,7 @@ export const Calendar: React.FC<CalendarProps> = ({
       // console.log("CALENDAR HOUR");
       [topValues, bottomValues] = getCalendarValuesForHour();
   }
+  
 
   // console.log("CALENDAR BOTTOM VALUES", topValues);
   // console.log("CALENDAR BOTTOM VALUES", bottomValues);
