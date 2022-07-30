@@ -98,14 +98,14 @@ export const ganttDateRange = (
       newEndDate = startOfDate(newEndDate, "year");
       break;
     case ViewMode.Semester:
-      console.log("DATE HELPER SEMESTER ");
+      // console.log("DATE HELPER SEMESTER ");
       newStartDate = addToDate(newStartDate, -1 * preStepsCount, "month");
       newStartDate = startOfDate(newStartDate, "month");
       newEndDate = addToDate(newEndDate, 2, "year");
       newEndDate = startOfDate(newEndDate, "year");
       break;
     case ViewMode.Trimester:
-      console.log("DATE HELPER TRIMESTER ");
+      // console.log("DATE HELPER TRIMESTER ");
       newStartDate = addToDate(newStartDate, -1 * preStepsCount, "month");
       newStartDate = startOfDate(newStartDate, "month");
       newEndDate = addToDate(newEndDate, 1, "year");
@@ -165,11 +165,11 @@ export const seedDates = (
         currentDate = addToDate(currentDate, 1, "month");
         break;
       case ViewMode.Semester:
-        console.log("SEED DATES SEMESTER ");
+        // console.log("SEED DATES SEMESTER ");
         currentDate = addToDate(currentDate, 6, "month");
         break;
       case ViewMode.Trimester:
-        console.log("SEED DATES TRIMESTER ");
+        // console.log("SEED DATES TRIMESTER ");
         currentDate = addToDate(currentDate, 3, "month");
         break;
       case ViewMode.Week:

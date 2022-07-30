@@ -404,27 +404,27 @@ export const Calendar: React.FC<CalendarProps> = ({
   switch (dateSetup.viewMode) {
     
     case ViewMode.Year:
-      console.log("CALENDAR YEAR");
+      // console.log("CALENDAR YEAR");
       [topValues, bottomValues] = getCalendarValuesForYear();
       break;
     case ViewMode.Month:
-      console.log("CALENDAR MONTH");
+      // console.log("CALENDAR MONTH");
       [topValues, bottomValues] = getCalendarValuesForMonth();
       break;
     case ViewMode.Semester:
-      console.log("CALENDAR SEMESTER");
+      // console.log("CALENDAR SEMESTER");
       [topValues, bottomValues] = getCalendarValuesForSemester();
       break;
     case ViewMode.Trimester:
-      console.log("CALENDAR TRIMESTER");
+      // console.log("CALENDAR TRIMESTER");
       [topValues, bottomValues] = getCalendarValuesForTrimester();
       break;
     case ViewMode.Week:
-      console.log("CALENDAR WEEK");
+      // console.log("CALENDAR WEEK");
       [topValues, bottomValues] = getCalendarValuesForWeek();
       break;
     case ViewMode.Day:
-      console.log("CALENDAR DAY");
+      // console.log("CALENDAR DAY");
       [topValues, bottomValues] = getCalendarValuesForDay();
       break;
     case ViewMode.QuarterDay:
@@ -432,12 +432,12 @@ export const Calendar: React.FC<CalendarProps> = ({
       [topValues, bottomValues] = getCalendarValuesForPartOfDay();
       break;
     case ViewMode.Hour:
-      console.log("CALENDAR HOUR");
+      // console.log("CALENDAR HOUR");
       [topValues, bottomValues] = getCalendarValuesForHour();
   }
 
-  console.log("CALENDAR BOTTOM VALUES", topValues);
-  console.log("CALENDAR BOTTOM VALUES", bottomValues);
+  // console.log("CALENDAR BOTTOM VALUES", topValues);
+  // console.log("CALENDAR BOTTOM VALUES", bottomValues);
 
   return (
     <g className="calendar" fontSize={fontSize} fontFamily={fontFamily}>
