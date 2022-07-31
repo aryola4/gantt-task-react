@@ -124,9 +124,74 @@ export const Calendar: React.FC<CalendarProps> = ({
     const topValues: ReactChild[] = [];
     const bottomValues: ReactChild[] = [];
     const topDefaultHeight = headerHeight * 0.5;
+    // const dates = dateSetup.dates;
+    // let semesterCount: number = 1;
+    // for (let i = 0; i < dateSetup.dates.length; i++) {
+    //   const date = dates[i];
+    //   let topValue = "";
+    //   // if (i === 0 || date.getMonth() !== dates[i - 1].getMonth()) {
+    //   //   // top
+    //   //   topValue = `${getLocaleMonth(date, locale)}, ${date.getFullYear()}`;
+    //   // }
+    //   if (i === 0 || date.getFullYear() !== dateSetup.dates[i - 1].getFullYear()) {
+    //     // top
+    //     topValue = date.getFullYear().toString();
+    //   }
+    //   // bottom
+    //   const bottomValue = "Sem " + (i+1).toString();
+
+    //   bottomValues.push(
+    //     <text
+    //       key={bottomValue + date.getFullYear()}
+    //       y={headerHeight * 0.8}
+    //       x={columnWidth * i + columnWidth * 0.5}
+    //       // x={columnWidth * i + columnWidth * 0.5}
+    //       // x={columnWidth * (i + +rtl)}
+    //       className={styles.calendarBottomText}
+    //     >
+    //       {bottomValue}
+    //     </text>
+    //   );
+
+    //   // bottomValues.push(
+    //   //   <text
+    //   //     key={bottomValue + date.getFullYear()}
+    //   //     y={headerHeight * 0.8}
+    //   //     x={columnWidth * i + columnWidth * 0.5}
+    //   //     className={styles.calendarBottomText}
+    //   //   >
+    //   //     {bottomValue}
+    //   //   </text>
+    //   // );
+
+    //   if (topValue) {
+    //     // if last day is new month
+    //     if (i !== dates.length - 1) {
+    //       topValues.push(
+    //         <TopPartOfCalendar
+    //           key={topValue}
+    //           value={topValue}
+    //           x1Line={columnWidth * i }
+    //           y1Line={0}
+    //           y2Line={topDefaultHeight}
+    //           xText={columnWidth * i + columnWidth * semesterCount * 0.5}
+    //           yText={topDefaultHeight * 0.9}
+    //         />
+    //       );
+    //     }
+    //     semesterCount = 0;
+    //   }
+    //   semesterCount++;
+    // }
     for (let i = 0; i < dateSetup.dates.length; i++) {
       const date = dateSetup.dates[i];
-      const bottomValue = getLocaleMonth(date, locale);
+      // const bottomValue = getLocaleMonth(date, locale);
+      const bottomValue = "S" + (i+1).toString();
+      // let topValue = "";
+      // if (i === 0 || date.getFullYear() !== dateSetup.dates[i - 1].getFullYear()) {
+      //   // top
+      //   topValue = date.getFullYear().toString();
+      // }
       bottomValues.push(
         <text
           key={bottomValue + date.getFullYear()}
@@ -140,26 +205,35 @@ export const Calendar: React.FC<CalendarProps> = ({
       if (
         i === 0 ||
         date.getFullYear() !== dateSetup.dates[i - 1].getFullYear()
-      ) {
+      ) 
+      // if (topValue) 
+      {
         const topValue = date.getFullYear().toString();
-        let xText: number;
-        if (rtl) {
-          xText = (6 + i + date.getMonth() + 1) * columnWidth;
-        } else {
-          xText = (6 + i - date.getMonth()) * columnWidth;
+        // let xText: number;
+        // if (rtl) {
+        //   // xText = (6 + i + date.getMonth() + 1) * columnWidth;
+        //   xText = i * columnWidth;
+        // } else {
+        //   xText = (6 + i - date.getMonth()) * columnWidth;
+        // }
+        if (i !== dateSetup.dates.length - 1) {
+          topValues.push(
+            <TopPartOfCalendar
+              key={topValue}
+              value={topValue}
+              x1Line={columnWidth * i }
+              y1Line={0}
+              y2Line={topDefaultHeight}
+              xText={columnWidth * i + columnWidth}
+              // xText={columnWidth * i + columnWidth * semesterCount * 0.5}
+              yText={topDefaultHeight * 0.9}
+            />
+          );
         }
-        topValues.push(
-          <TopPartOfCalendar
-            key={topValue}
-            value={topValue}
-            x1Line={columnWidth * i}
-            y1Line={0}
-            y2Line={topDefaultHeight}
-            xText={xText}
-            yText={topDefaultHeight * 0.9}
-          />
-        );
+
+        // semesterCount = 0;
       }
+      // semesterCount++;
     }
     return [topValues, bottomValues];
   };
@@ -170,7 +244,8 @@ export const Calendar: React.FC<CalendarProps> = ({
     const topDefaultHeight = headerHeight * 0.5;
     for (let i = 0; i < dateSetup.dates.length; i++) {
       const date = dateSetup.dates[i];
-      const bottomValue = getLocaleMonth(date, locale);
+      // const bottomValue = getLocaleMonth(date, locale);
+      const bottomValue = "T" + (i + 1).toString();
       bottomValues.push(
         <text
           key={bottomValue + date.getFullYear()}
@@ -186,12 +261,12 @@ export const Calendar: React.FC<CalendarProps> = ({
         date.getFullYear() !== dateSetup.dates[i - 1].getFullYear()
       ) {
         const topValue = date.getFullYear().toString();
-        let xText: number;
-        if (rtl) {
-          xText = (6 + i + date.getMonth() + 1) * columnWidth;
-        } else {
-          xText = (6 + i - date.getMonth()) * columnWidth;
-        }
+        // let xText: number;
+        // if (rtl) {
+        //   xText = (6 + i + date.getMonth() + 1) * columnWidth;
+        // } else {
+        //   xText = (6 + i - date.getMonth()) * columnWidth;
+        // }
         topValues.push(
           <TopPartOfCalendar
             key={topValue}
@@ -199,7 +274,7 @@ export const Calendar: React.FC<CalendarProps> = ({
             x1Line={columnWidth * i}
             y1Line={0}
             y2Line={topDefaultHeight}
-            xText={xText}
+            xText={columnWidth * i + columnWidth * 2}
             yText={topDefaultHeight * 0.9}
           />
         );
@@ -400,9 +475,9 @@ export const Calendar: React.FC<CalendarProps> = ({
 
   let topValues: ReactChild[] = [];
   let bottomValues: ReactChild[] = [];
-  
+
   switch (dateSetup.viewMode) {
-    
+
     case ViewMode.Year:
       // console.log("CALENDAR YEAR");
       [topValues, bottomValues] = getCalendarValuesForYear();
@@ -435,7 +510,7 @@ export const Calendar: React.FC<CalendarProps> = ({
       // console.log("CALENDAR HOUR");
       [topValues, bottomValues] = getCalendarValuesForHour();
   }
-  
+
 
   // console.log("CALENDAR BOTTOM VALUES", topValues);
   // console.log("CALENDAR BOTTOM VALUES", bottomValues);
