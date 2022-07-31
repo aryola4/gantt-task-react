@@ -52,17 +52,17 @@ export function initTasks() {
       displayOrder: 4,
     },
 
-    {
-      start: new Date(2020, 4, 28),
-      end: new Date(currentDate.getFullYear(), 8, 8, 0, 0),
-      name: "Second Discussion with team",
-      id: "Task 87",
-      progress: 10,
-      dependencies: ["Task 1", "Task 8"],
-      type: "task",
-      project: "ProjectSample",
-      displayOrder: 4,
-    },
+    // {
+    //   start: new Date(2020, 4, 28),
+    //   end: new Date(currentDate.getFullYear(), 8, 8, 0, 0),
+    //   name: "Second Discussion with team",
+    //   id: "Task 87",
+    //   progress: 10,
+    //   dependencies: ["Task 1", "Task 8"],
+    //   type: "task",
+    //   project: "ProjectSample",
+    //   displayOrder: 4,
+    // },
     
     {
       start: new Date(2020, 9, 28),

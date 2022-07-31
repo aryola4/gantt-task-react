@@ -127,13 +127,17 @@ export const Calendar: React.FC<CalendarProps> = ({
     let semesterCount: number = 1;
     for (let i = 0; i < dateSetup.dates.length; i++) {
       const date = dateSetup.dates[i];
-      // const bottomValue = getLocaleMonth(date, locale);
-      if(i !== 0 && dateSetup.dates[i].getFullYear() === dateSetup.dates[i-1].getFullYear() ) {
+      if (i !== 0 && dateSetup.dates[i].getFullYear() === dateSetup.dates[i - 1].getFullYear()) {
         semesterCount++;
       } else {
         semesterCount = 1;
       }
-      const bottomValue = "S" + semesterCount.toString();
+      let bottomValue = "S" + semesterCount.toString();
+
+      if (date.getMonth() > 6) {
+        bottomValue = "S2";
+      }
+
       bottomValues.push(
         <text
           key={bottomValue + date.getFullYear()}
@@ -166,7 +170,7 @@ export const Calendar: React.FC<CalendarProps> = ({
           />
         );
         semesterCount = 1;
-      } 
+      }
     }
     return [topValues, bottomValues];
   };
@@ -179,12 +183,23 @@ export const Calendar: React.FC<CalendarProps> = ({
     for (let i = 0; i < dateSetup.dates.length; i++) {
       const date = dateSetup.dates[i];
       // const bottomValue = getLocaleMonth(date, locale);
-      if(i !== 0 && dateSetup.dates[i].getFullYear() === dateSetup.dates[i-1].getFullYear() ) {
+      if (i !== 0 && dateSetup.dates[i].getFullYear() === dateSetup.dates[i - 1].getFullYear()) {
         semesterCount++;
       } else {
         semesterCount = 1;
       }
-      const bottomValue = "T" + (semesterCount).toString();
+
+      if (date.getMonth() > 3 && date.getMonth() < 6) {
+        semesterCount = 2;
+      } else if (date.getMonth() > 6 && date.getMonth() < 9){
+        semesterCount = 3;
+      } else if(date.getMonth() > 9){
+        semesterCount = 4;
+      }
+
+      let bottomValue = "T" + (semesterCount).toString();
+
+
       bottomValues.push(
         <text
           key={bottomValue + date.getFullYear()}
