@@ -12,7 +12,7 @@ export enum ViewMode {
   
 }
 
-export type TaskType = "task" | "milestone" | "project";
+export type TaskType = "task" | "milestone" | "project" | "component" | "subcomponent" | "phase" | "activity";
 export interface Task {
   id: string;
   type: TaskType;

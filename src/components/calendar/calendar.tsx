@@ -167,6 +167,7 @@ export const Calendar: React.FC<CalendarProps> = ({
             y2Line={topDefaultHeight}
             xText={xText}
             yText={topDefaultHeight * 0.9}
+            isEven={topValues.length%2 === 0}
           />
         );
         semesterCount = 1;
@@ -245,6 +246,8 @@ export const Calendar: React.FC<CalendarProps> = ({
             y2Line={topDefaultHeight}
             xText={xText}
             yText={topDefaultHeight * 0.9}
+            isEven={topValues.length%2 === 0}
+
           />
         );
       }

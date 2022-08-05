@@ -45,7 +45,7 @@ export function initTasks() {
       end: new Date(currentDate.getFullYear(), 8, 8, 0, 0),
       name: "Discussion with team",
       id: "Task 2",
-      progress: 10,
+      progress: 10.0,
       dependencies: ["Task 1"],
       type: "task",
       project: "ProjectSample",

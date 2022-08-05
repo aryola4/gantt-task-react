@@ -8,6 +8,7 @@ type TopPartOfCalendarProps = {
   y2Line: number;
   xText: number;
   yText: number;
+  isEven?: boolean ;
 };
 
 export const TopPartOfCalendar: React.FC<TopPartOfCalendarProps> = ({
@@ -17,6 +18,7 @@ export const TopPartOfCalendar: React.FC<TopPartOfCalendarProps> = ({
   y2Line,
   xText,
   yText,
+  isEven
 }) => {
   return (
     <g className="calendarTop">
@@ -32,8 +34,9 @@ export const TopPartOfCalendar: React.FC<TopPartOfCalendarProps> = ({
         key={value + "text"}
         y={yText}
         x={xText}
-        className={styles.calendarTopText}
+        className={isEven ? styles.calendarEvenTopText : styles.calendarOddTopText }
       >
+        {/* <span className={styles.topPartEvenText}> {value} </span> */}
         {value}
       </text>
     </g>
