@@ -280,7 +280,7 @@ const convertToBar = (
     rtl
   );
   const y = taskYCoordinate(index, rowHeight, taskHeight);
-  const hideChildren = task.type === "project" ? task.hideChildren : undefined;
+  const hideChildren = ( task.type === "project" || task.type === "Volet" || task.type === "Composante" || task.type === "Sous composante" )  && task.childrenCount !== undefined && task.childrenCount !== 0 ? task.hideChildren : undefined;
 
   const styles = {
     backgroundColor: barBackgroundColor,

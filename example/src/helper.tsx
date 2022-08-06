@@ -12,6 +12,7 @@ export function initTasks() {
       type: "project",
       hideChildren: false,
       displayOrder: 1,
+      childrenCount: 6,
     },
     {
       start: new Date(currentDate.getFullYear(), 1, 1),
@@ -25,9 +26,11 @@ export function initTasks() {
       name: "Idea",
       id: "Task 0",
       progress: 45,
-      type: "Volet",
+      type: "Composante",
       project: "ProjectSample",
       displayOrder: 2,
+      hideChildren: false,
+      childrenCount: 4,
     },
     {
       start: new Date(currentDate.getFullYear(), 9, 2),
@@ -38,7 +41,9 @@ export function initTasks() {
       dependencies: ["Task 0"],
       type: "Composante",
       project: "ProjectSample",
-      displayOrder: 3,
+      displayOrder: 2,
+      childrenCount: 1,
+      hideChildren: false,
     },
     {
       start: new Date(currentDate.getFullYear(), 5, 4),
@@ -50,6 +55,7 @@ export function initTasks() {
       type: "Sous composante",
       project: "ProjectSample",
       displayOrder: 4,
+      childrenCount: 0,
     },
 
     // {
@@ -74,6 +80,7 @@ export function initTasks() {
       type: "Activité",
       project: "ProjectSample",
       displayOrder: 4,
+      childrenCount: 0,
     },
     {
       start: new Date(2020, 11, 8),
@@ -85,6 +92,7 @@ export function initTasks() {
       type: "Sous composante",
       project: "ProjectSample",
       displayOrder: 4,
+      childrenCount: 0,
     },
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 8),
@@ -96,6 +104,7 @@ export function initTasks() {
       type: "task",
       project: "ProjectSample",
       displayOrder: 5,
+      childrenCount: 0,
     },
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 8),
@@ -107,6 +116,7 @@ export function initTasks() {
       dependencies: ["Task 2"],
       project: "ProjectSample",
       displayOrder: 6,
+      childrenCount: 0,
     },
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 15),
@@ -118,6 +128,7 @@ export function initTasks() {
       dependencies: ["Task 4"],
       project: "ProjectSample",
       displayOrder: 7,
+      childrenCount: 0,
     },
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 18),
@@ -127,6 +138,7 @@ export function initTasks() {
       progress: 0,
       isDisabled: true,
       type: "task",
+      childrenCount: 0,
     },
   ];
   return tasks;

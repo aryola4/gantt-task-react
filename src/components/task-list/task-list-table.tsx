@@ -57,11 +57,18 @@ export const TaskListTableDefault: React.FC<{
         }}
       >
         {tasks.map(t => {
-          let expanderSymbol = "";
+          // let expanderSymbol = "";
+          // if (t.hideChildren === false) {
+          //   expanderSymbol = "▼";
+          // } else if (t.hideChildren === true) {
+          //   expanderSymbol = "▶";
+          // }
+
+          let xexpanderSymbol = "";
           if (t.hideChildren === false) {
-            expanderSymbol = "▼";
+            xexpanderSymbol = "▼";
           } else if (t.hideChildren === true) {
-            expanderSymbol = "▶";
+            xexpanderSymbol = "▶";
           }
 
           return (
@@ -86,13 +93,13 @@ export const TaskListTableDefault: React.FC<{
                         <div className={styles.taskListNameWrapper}>
                           <div
                             className={
-                              expanderSymbol
+                              xexpanderSymbol
                                 ? styles.taskListExpander
                                 : styles.taskListEmptyExpander
                             }
                             onClick={() => onExpanderClick(t)}
                           >
-                            {expanderSymbol}
+                            {xexpanderSymbol}
                           </div>
                           <div>{ columnVisibility.toShow(t)?.toString() }</div>
                         </div>
