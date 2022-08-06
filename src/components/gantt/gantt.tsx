@@ -25,11 +25,11 @@ import { removeHiddenTasks, sortTasks } from "../../helpers/other-helper";
 import styles from "./gantt.module.css";
 
 const COLUMNLIST = [
-  { columnName: 'Code', isVisible: true, columnWithArrow: true, toShow: (task:Task) => {return task.id} },
-  { columnName: 'Nom', isVisible: true, toShow: (task:Task) => {return task.name} },
-  { columnName: 'Début', isVisible: true, isDate:true, toShow: (task:Task) => {return task.start} },
-  { columnName: 'Fin', isVisible: true, isDate:true, toShow: (task:Task) => {return task.end} },
-  { columnName: 'Assigné à', isVisible: true, toShow: (task:Task) => {return task.assignedUser} },
+  { columnName: 'Code', isVisible: true, columnWithArrow: true, toShow: (task: Task) => { return task.id } },
+  { columnName: 'Nom', isVisible: true, toShow: (task: Task) => { return task.name } },
+  { columnName: 'Début', isVisible: true, isDate: true, toShow: (task: Task) => { return task.start } },
+  { columnName: 'Fin', isVisible: true, isDate: true, toShow: (task: Task) => { return task.end } },
+  { columnName: 'Assigné à', isVisible: true, toShow: (task: Task) => { return task.assignedUser } },
 ];
 
 export const Gantt: React.FunctionComponent<GanttProps> = ({
@@ -52,8 +52,22 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   projectProgressSelectedColor = "#59a985",
   projectBackgroundColor = "#fac465",
   projectBackgroundSelectedColor = "#f7bb53",
+
   milestoneBackgroundColor = "#f1c453",
   milestoneBackgroundSelectedColor = "#f29e4c",
+
+  componentBackgroundColor = "#67daff",
+  componentBackgroundSelectedColor = "#007ac1",
+
+  subcomponentBackgroundColor = "#4fb3bf",
+  subcomponentBackgroundSelectedColor = "#005662",
+
+  phaseBackgroundColor = "#b2fef7",
+  phaseBackgroundSelectedColor = "#80cbc4",
+
+  activityBackgroundColor = "#dfaf2c",
+  activityBackgroundSelectedColor = "#b5df2c",
+
   rtl = false,
   handleWidth = 8,
   timeStep = 300000,
@@ -148,7 +162,19 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
         projectBackgroundColor,
         projectBackgroundSelectedColor,
         milestoneBackgroundColor,
-        milestoneBackgroundSelectedColor
+        milestoneBackgroundSelectedColor,
+
+        componentBackgroundColor,
+        componentBackgroundSelectedColor,
+
+        subcomponentBackgroundColor,
+        subcomponentBackgroundSelectedColor,
+
+        phaseBackgroundColor,
+        phaseBackgroundSelectedColor,
+
+        activityBackgroundColor,
+        activityBackgroundSelectedColor,
       )
     );
   }, [
@@ -173,6 +199,18 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     rtl,
     scrollX,
     onExpanderClick,
+
+    componentBackgroundColor,
+    componentBackgroundSelectedColor,
+
+    subcomponentBackgroundColor,
+    subcomponentBackgroundSelectedColor,
+
+    phaseBackgroundColor,
+    phaseBackgroundSelectedColor,
+
+    activityBackgroundColor,
+    activityBackgroundSelectedColor,
   ]);
 
   useEffect(() => {

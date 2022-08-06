@@ -20,7 +20,21 @@ export const convertToBarTasks = (
   projectBackgroundColor: string,
   projectBackgroundSelectedColor: string,
   milestoneBackgroundColor: string,
-  milestoneBackgroundSelectedColor: string
+  milestoneBackgroundSelectedColor: string,
+
+  componentBackgroundColor: string,
+  componentBackgroundSelectedColor: string,
+
+  subcomponentBackgroundColor: string,
+  subcomponentBackgroundSelectedColor: string,
+
+  phaseBackgroundColor: string,
+  phaseBackgroundSelectedColor: string,
+
+  activityBackgroundColor: string,
+  activityBackgroundSelectedColor: string,
+
+
 ) => {
   let barTasks = tasks.map((t, i) => {
     return convertToBarTask(
@@ -42,7 +56,19 @@ export const convertToBarTasks = (
       projectBackgroundColor,
       projectBackgroundSelectedColor,
       milestoneBackgroundColor,
-      milestoneBackgroundSelectedColor
+      milestoneBackgroundSelectedColor,
+
+      componentBackgroundColor,
+      componentBackgroundSelectedColor,
+
+      subcomponentBackgroundColor,
+      subcomponentBackgroundSelectedColor,
+
+      phaseBackgroundColor,
+      phaseBackgroundSelectedColor,
+
+      activityBackgroundColor,
+      activityBackgroundSelectedColor,
     );
   });
 
@@ -80,7 +106,20 @@ const convertToBarTask = (
   projectBackgroundColor: string,
   projectBackgroundSelectedColor: string,
   milestoneBackgroundColor: string,
-  milestoneBackgroundSelectedColor: string
+  milestoneBackgroundSelectedColor: string,
+
+  componentBackgroundColor: string,
+  componentBackgroundSelectedColor: string,
+
+  subcomponentBackgroundColor: string,
+  subcomponentBackgroundSelectedColor: string,
+
+  phaseBackgroundColor: string,
+  phaseBackgroundSelectedColor: string,
+
+  activityBackgroundColor: string,
+  activityBackgroundSelectedColor: string,
+
 ): BarTask => {
   let barTask: BarTask;
   switch (task.type) {
@@ -113,6 +152,74 @@ const convertToBarTask = (
         projectProgressSelectedColor,
         projectBackgroundColor,
         projectBackgroundSelectedColor
+      );
+      break;
+    case "Composante":
+      barTask = convertToBar(
+        task,
+        index,
+        dates,
+        columnWidth,
+        rowHeight,
+        taskHeight,
+        barCornerRadius,
+        handleWidth,
+        rtl,
+        projectProgressColor,
+        projectProgressSelectedColor,
+        componentBackgroundColor,
+        componentBackgroundSelectedColor,
+      );
+      break;
+    case "Sous composante":
+      barTask = convertToBar(
+        task,
+        index,
+        dates,
+        columnWidth,
+        rowHeight,
+        taskHeight,
+        barCornerRadius,
+        handleWidth,
+        rtl,
+        projectProgressColor,
+        projectProgressSelectedColor,
+        subcomponentBackgroundColor,
+        subcomponentBackgroundSelectedColor,
+      );
+      break;
+    case "Volet":
+      barTask = convertToBar(
+        task,
+        index,
+        dates,
+        columnWidth,
+        rowHeight,
+        taskHeight,
+        barCornerRadius,
+        handleWidth,
+        rtl,
+        projectProgressColor,
+        projectProgressSelectedColor,
+        phaseBackgroundColor,
+        phaseBackgroundSelectedColor,
+      );
+      break;
+    case "Activité":
+      barTask = convertToBar(
+        task,
+        index,
+        dates,
+        columnWidth,
+        rowHeight,
+        taskHeight,
+        barCornerRadius,
+        handleWidth,
+        rtl,
+        projectProgressColor,
+        projectProgressSelectedColor,
+        activityBackgroundColor,
+        activityBackgroundSelectedColor
       );
       break;
     default:
@@ -373,7 +480,7 @@ const dateByX = (
   let newDate = new Date(((x - taskX) / xStep) * timeStep + taskDate.getTime());
   newDate = new Date(
     newDate.getTime() +
-      (newDate.getTimezoneOffset() - taskDate.getTimezoneOffset()) * 60000
+    (newDate.getTimezoneOffset() - taskDate.getTimezoneOffset()) * 60000
   );
   return newDate;
 };

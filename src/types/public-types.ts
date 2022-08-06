@@ -12,7 +12,7 @@ export enum ViewMode {
   
 }
 
-export type TaskType = "task" | "milestone" | "project" | "component" | "subcomponent" | "phase" | "activity";
+export type TaskType = "task" | "milestone" | "project" | "Composante" | "Sous composante" | "Volet" | "Activité";
 export interface Task {
   id: string;
   type: TaskType;
@@ -125,6 +125,20 @@ export interface StylingOption {
   projectBackgroundSelectedColor?: string;
   milestoneBackgroundColor?: string;
   milestoneBackgroundSelectedColor?: string;
+
+  componentBackgroundColor?: string,
+  componentBackgroundSelectedColor?: string,
+
+  subcomponentBackgroundColor?: string,
+  subcomponentBackgroundSelectedColor?: string,
+
+  phaseBackgroundColor?: string,
+  phaseBackgroundSelectedColor?: string,
+
+  activityBackgroundColor?: string,
+  activityBackgroundSelectedColor?: string,
+
+
   arrowColor?: string;
   arrowIndent?: number;
   todayColor?: string;
