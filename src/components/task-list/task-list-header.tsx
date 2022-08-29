@@ -25,7 +25,7 @@ export const TaskListHeaderDefault: React.FC<{
           height: headerHeight - 2,
         }}
       >
-        {columnList.map(columnVisibility => {
+        {columnList.map((columnVisibility, index) => {
           if(columnVisibility.isVisible === true) {
             return (
               <div key={columnVisibility.columnName}
@@ -39,7 +39,7 @@ export const TaskListHeaderDefault: React.FC<{
             )
           }
           else {
-            return(<div></div>);
+            return(<div key={index}></div>);
           }
         })}
       </div>

@@ -77,7 +77,7 @@ export const TaskListTableDefault: React.FC<{
               style={{ height: rowHeight }}
               key={`${t.id}row`}
             >
-              {columnList.map(columnVisibility => {
+              {columnList.map((columnVisibility, index) => {
                 if (columnVisibility.isVisible === true) {
                   if (columnVisibility.columnWithArrow === true) {
                     return (
@@ -101,7 +101,7 @@ export const TaskListTableDefault: React.FC<{
                           >
                             {xexpanderSymbol}
                           </div>
-                          <div>{ columnVisibility.toShow(t)?.toString() }</div>
+                          <div>{columnVisibility.toShow(t)?.toString()}</div>
                         </div>
 
                       </div>
@@ -109,85 +109,24 @@ export const TaskListTableDefault: React.FC<{
                   } else {
                     return (
                       <div
+                        key={columnVisibility.columnName}
                         className={styles.taskListCell}
                         style={{
                           minWidth: rowWidth,
                           maxWidth: rowWidth,
                         }}
                       >
-                        &nbsp;{ columnVisibility.isDate === true ? toLocaleDateString((columnVisibility.toShow(t) as Date), dateTimeOptions) : columnVisibility.toShow(t)} 
+                        &nbsp;{columnVisibility.isDate === true ? toLocaleDateString((columnVisibility.toShow(t) as Date), dateTimeOptions) : columnVisibility.toShow(t)}
                       </div>
                     );
                   }
                 }
                 else {
-                  return (<div></div>);
+                  return (<div key={index}></div>);
                 }
               })}
             </div>
-
-            
-
-            // <div
-            //   className={styles.taskListTableRow}
-            //   style={{ height: rowHeight }}
-            //   key={`${t.id}row`}
-            // >
-
-            //   <div
-            //     className={styles.taskListCell}
-            //     style={{
-            //       minWidth: rowWidth,
-            //       maxWidth: rowWidth,
-            //     }}
-            //     title={t.name}
-            //   >
-            //     <div className={styles.taskListNameWrapper}>
-            //       <div
-            //         className={
-            //           expanderSymbol
-            //             ? styles.taskListExpander
-            //             : styles.taskListEmptyExpander
-            //         }
-            //         onClick={() => onExpanderClick(t)}
-            //       >
-            //         {expanderSymbol}
-            //       </div>
-            //       <div>{t.name}</div>
-            //     </div>
-            //   </div>
-            //   <div
-            //     className={styles.taskListCell}
-            //     style={{
-            //       minWidth: rowWidth,
-            //       maxWidth: rowWidth,
-            //     }}
-            //   >
-            //     &nbsp;{toLocaleDateString(t.start, dateTimeOptions)}
-            //   </div>
-            //   <div
-            //     className={styles.taskListCell}
-            //     style={{
-            //       minWidth: rowWidth,
-            //       maxWidth: rowWidth,
-            //     }}
-            //   >
-            //     &nbsp;{toLocaleDateString(t.end, dateTimeOptions)}
-            //   </div>
-            //   <div
-            //     className={styles.taskListCell}
-            //     style={{
-            //       minWidth: rowWidth,
-            //       maxWidth: rowWidth,
-            //     }}
-            //   >
-            //     &nbsp; {t.assignedUser}
-            //   </div>
-
-            // </div>
           );
-
-
         })}
       </div>
     );
