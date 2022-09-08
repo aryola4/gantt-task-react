@@ -190,11 +190,11 @@ export const Calendar: React.FC<CalendarProps> = ({
         semesterCount = 1;
       }
 
-      if (date.getMonth() > 3 && date.getMonth() < 6) {
+      if (date.getMonth() >= 3 && date.getMonth() < 6) {
         semesterCount = 2;
-      } else if (date.getMonth() > 6 && date.getMonth() < 9){
+      } else if (date.getMonth() >= 6 && date.getMonth() < 9){
         semesterCount = 3;
-      } else if(date.getMonth() > 9){
+      } else if(date.getMonth() >= 9){
         semesterCount = 4;
       }
 
