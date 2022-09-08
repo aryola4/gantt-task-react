@@ -132,10 +132,10 @@ export const Calendar: React.FC<CalendarProps> = ({
       } else {
         semesterCount = 1;
       }
-      let bottomValue = "S" + semesterCount.toString();
+      let bottomValue = "D" + semesterCount.toString();
 
-      if (date.getMonth() > 6) {
-        bottomValue = "S2";
+      if (date.getMonth() >= 6) {
+        bottomValue = "D2";
       }
 
       bottomValues.push(
@@ -155,7 +155,7 @@ export const Calendar: React.FC<CalendarProps> = ({
       ) {
         const topValue = date.getFullYear().toString();
         let xText = columnWidth * i + columnWidth;
-        if (date.getMonth() > 6) {
+        if (date.getMonth() >= 6) {
           xText = columnWidth * i + columnWidth * 0.5;
         }
         topValues.push(

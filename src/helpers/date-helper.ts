@@ -85,12 +85,12 @@ export const ganttDateRange = (
     }
   }
   switch (viewMode) {
-    case ViewMode.Year:
-      newStartDate = addToDate(newStartDate, -1, "year");
-      newStartDate = startOfDate(newStartDate, "year");
-      newEndDate = addToDate(newEndDate, 1, "year");
-      newEndDate = startOfDate(newEndDate, "year");
-      break;
+    // case ViewMode.Year:
+    //   newStartDate = addToDate(newStartDate, -1, "year");
+    //   newStartDate = startOfDate(newStartDate, "year");
+    //   newEndDate = addToDate(newEndDate, 1, "year");
+    //   newEndDate = startOfDate(newEndDate, "year");
+    //   break;
     case ViewMode.Month:
       newStartDate = addToDate(newStartDate, -1 * preStepsCount, "month");
       newStartDate = startOfDate(newStartDate, "month");
@@ -98,15 +98,17 @@ export const ganttDateRange = (
       newEndDate = startOfDate(newEndDate, "year");
       break;
     case ViewMode.Semester:
+      // console.log("DATE HELPER SEMESTER ");
       newStartDate = addToDate(newStartDate, -1 * preStepsCount, "month");
       newStartDate = startOfDate(newStartDate, "month");
-      newEndDate = addToDate(newEndDate, 6, "month");
+      newEndDate = addToDate(newEndDate, 2, "year");
       newEndDate = startOfDate(newEndDate, "year");
       break;
     case ViewMode.Trimester:
+      // console.log("DATE HELPER TRIMESTER ");
       newStartDate = addToDate(newStartDate, -1 * preStepsCount, "month");
       newStartDate = startOfDate(newStartDate, "month");
-      newEndDate = addToDate(newEndDate, 3, "month");
+      newEndDate = addToDate(newEndDate, 1, "year");
       newEndDate = startOfDate(newEndDate, "year");
       break;
     case ViewMode.Week:
@@ -150,10 +152,12 @@ export const ganttDateRange = (
 export const seedDates = (
   startDate: Date,
   endDate: Date,
-  viewMode: ViewMode
+  viewMode: ViewMode,
+  // postStepsCount: number = -1,
 ) => {
   let currentDate: Date = new Date(startDate);
   const dates: Date[] = [currentDate];
+  console.log("ENDATED ", endDate);
   while (currentDate < endDate) {
     switch (viewMode) {
       case ViewMode.Year:
@@ -186,8 +190,70 @@ export const seedDates = (
         currentDate = addToDate(currentDate, 1, "hour");
         break;
     }
+    console.log("CURRENT DATE KA ", currentDate);
     dates.push(currentDate);
   }
+
+  // while (currentDate <= endDate) {
+  //   switch (viewMode) {
+  //     case ViewMode.Year:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 1;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "year");
+  //       break;
+  //     case ViewMode.Month:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 1;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "month");
+  //       break;
+  //     case ViewMode.Semester:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 6;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "month");
+  //       break;
+  //     case ViewMode.Trimester:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 3;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "month");
+  //       break;
+  //     case ViewMode.Week:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 7;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "day");
+  //       break;
+  //     case ViewMode.Day:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 1;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "day");
+  //       break;
+  //     case ViewMode.HalfDay:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 12;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "hour");
+  //       break;
+  //     case ViewMode.QuarterDay:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 6;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "hour");
+  //       break;
+  //     case ViewMode.Hour:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 1;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "hour");
+  //       break;
+  //   }
+  //   dates.push(currentDate);
+  // }
+
   return dates;
 };
 
