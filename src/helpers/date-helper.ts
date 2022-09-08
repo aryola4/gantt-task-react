@@ -85,12 +85,12 @@ export const ganttDateRange = (
     }
   }
   switch (viewMode) {
-    // case ViewMode.Year:
-    //   newStartDate = addToDate(newStartDate, -1, "year");
-    //   newStartDate = startOfDate(newStartDate, "year");
-    //   newEndDate = addToDate(newEndDate, 1, "year");
-    //   newEndDate = startOfDate(newEndDate, "year");
-    //   break;
+    case ViewMode.Year:
+      newStartDate = addToDate(newStartDate, -1, "year");
+      newStartDate = startOfDate(newStartDate, "year");
+      newEndDate = addToDate(newEndDate, 1, "year");
+      newEndDate = startOfDate(newEndDate, "year");
+      break;
     case ViewMode.Month:
       newStartDate = addToDate(newStartDate, -1 * preStepsCount, "month");
       newStartDate = startOfDate(newStartDate, "month");
@@ -101,14 +101,14 @@ export const ganttDateRange = (
       // console.log("DATE HELPER SEMESTER ");
       newStartDate = addToDate(newStartDate, -1 * preStepsCount, "month");
       newStartDate = startOfDate(newStartDate, "month");
-      newEndDate = addToDate(newEndDate, 2, "year");
+      newEndDate = addToDate(newEndDate, 6, "month");
       newEndDate = startOfDate(newEndDate, "year");
       break;
     case ViewMode.Trimester:
       // console.log("DATE HELPER TRIMESTER ");
       newStartDate = addToDate(newStartDate, -1 * preStepsCount, "month");
       newStartDate = startOfDate(newStartDate, "month");
-      newEndDate = addToDate(newEndDate, 1, "year");
+      newEndDate = addToDate(newEndDate, 3, "month");
       newEndDate = startOfDate(newEndDate, "year");
       break;
     case ViewMode.Week:

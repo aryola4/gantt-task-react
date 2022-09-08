@@ -132,10 +132,10 @@ export const Calendar: React.FC<CalendarProps> = ({
       } else {
         semesterCount = 1;
       }
-      let bottomValue = "D" + semesterCount.toString();
+      let bottomValue = "S" + semesterCount.toString();
 
       if (date.getMonth() >= 6) {
-        bottomValue = "D2";
+        bottomValue = "S2";
       }
 
       bottomValues.push(
