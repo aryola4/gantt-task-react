@@ -84,8 +84,8 @@ export const TaskListTableDefault: React.FC<{
                       <div key={columnVisibility.columnName}
                         className={styles.taskListCell}
                         style={{
-                          minWidth: "50px",
-                          maxWidth: "50px",
+                          minWidth: "100px",
+                          maxWidth: "100px",
                         }}
                         title={t.name}
                       >

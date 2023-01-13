@@ -29,7 +29,7 @@ export const TaskListHeaderDefault: React.FC<{
           if(columnVisibility.isVisible === true) {
             let tempRowWidth = rowWidth;
             if(columnVisibility.columnWithArrow){
-              tempRowWidth = "50px";
+              tempRowWidth = "100px";
             } 
             return (
               <div key={columnVisibility.columnName}
