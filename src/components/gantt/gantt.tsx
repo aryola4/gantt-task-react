@@ -69,6 +69,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   activityBackgroundSelectedColor = "#b5df2c",
 
   rtl = false,
+  showTaskName=true,
   handleWidth = 8,
   timeStep = 300000,
   arrowColor = "grey",
@@ -468,6 +469,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     arrowIndent,
     svgWidth,
     rtl,
+    showTaskName,
     setGanttEvent,
     setFailedTask,
     setSelectedTask: handleSelectedTask,

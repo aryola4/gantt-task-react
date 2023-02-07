@@ -16,6 +16,7 @@ export type TaskItemProps = {
   isDelete: boolean;
   isSelected: boolean;
   rtl: boolean;
+  showTaskName: boolean;
   onEventStart: (
     action: GanttContentMoveAction,
     selectedTask: BarTask,
@@ -31,6 +32,7 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
     taskHeight,
     isSelected,
     rtl,
+    showTaskName,
     onEventStart,
   } = {
     ...props,
@@ -118,7 +120,7 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
         }
         ref={textRef}
       >
-        {task.name}
+        {showTaskName? task.name : ""}
       </text>
     </g>
   );

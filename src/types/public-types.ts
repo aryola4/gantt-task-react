@@ -101,6 +101,7 @@ export interface DisplayOption {
    */
   locale?: string;
   rtl?: boolean;
+  showTaskName?: boolean;
 }
 
 export interface StylingOption {

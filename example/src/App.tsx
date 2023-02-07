@@ -96,6 +96,8 @@ const App = () => {
         listCellWidth={isChecked ? "155px" : ""}
         columnWidth={columnWidth}
         columnList={COLUMNLIST}
+        showTaskName={false}
+        preStepsCount={0}
       />
       <h3>Gantt With Limited Height</h3>
       <Gantt
