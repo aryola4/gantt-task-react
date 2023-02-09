@@ -34,7 +34,7 @@ export function initTasks() {
     },
     {
       start: new Date(currentDate.getFullYear(), 9, 2),
-      end: new Date(currentDate.getFullYear(), 12, 4, 0, 0),
+      end: new Date(2023,12,31),
       name: "Research",
       id: "Task 1",
       progress: 25,

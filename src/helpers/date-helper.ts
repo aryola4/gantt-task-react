@@ -86,7 +86,7 @@ export const ganttDateRange = (
   }
   switch (viewMode) {
     case ViewMode.Year:
-      newStartDate = addToDate(newStartDate, -1, "year");
+      newStartDate = addToDate(newStartDate, -1 * preStepsCount, "year");
       newStartDate = startOfDate(newStartDate, "year");
       newEndDate = addToDate(newEndDate, 1, "year");
       newEndDate = startOfDate(newEndDate, "year");
