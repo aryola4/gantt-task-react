@@ -103,6 +103,7 @@ export interface DisplayOption {
   rtl?: boolean;
   showTaskName?: boolean;
   showOnlyFirstLetters?: boolean;
+  dateInterval?: Date[];
 }
 
 export interface StylingOption {

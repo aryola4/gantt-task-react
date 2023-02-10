@@ -100,6 +100,7 @@ const App = () => {
         preStepsCount={0}
         fontSize={"8"}
         showOnlyFirstLetters={true}
+        dateInterval = {[new Date(2015, 1, 1), new Date(2030, 12, 31)]}
       />
       <h3>Gantt With Limited Height</h3>
       <Gantt

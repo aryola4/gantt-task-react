@@ -72,8 +72,17 @@ export const startOfDate = (date: Date, scale: DateHelperScales) => {
 export const ganttDateRange = (
   tasks: Task[],
   viewMode: ViewMode,
-  preStepsCount: number
+  preStepsCount: number,
+  dateInterval: Date[],
 ) => {
+  // let dateIntervall = [new Date(2015, 1, 1), new Date(2030, 12, 31)];
+  console.log("DATEINTERVAL: ", dateInterval);
+  if (dateInterval && dateInterval.length === 2) {
+    let newStartDate = new Date(dateInterval[0],);
+    let newEndDate = new Date(dateInterval[1]);
+    return [newStartDate, newEndDate];
+  };
+
   let newStartDate: Date = tasks[0].start;
   let newEndDate: Date = tasks[0].start;
   for (const task of tasks) {
@@ -247,7 +256,7 @@ export const seedDates = (
   //   }
   //   dates.push(currentDate);
   // }
-
+  console.log("SEED DATES: ", dates);
   return dates;
 };
 
