@@ -20,6 +20,7 @@ export type CalendarProps = {
   columnWidth: number;
   fontFamily: string;
   fontSize: string;
+  showOnlyFirstLetters: boolean;
 };
 
 export const Calendar: React.FC<CalendarProps> = ({
@@ -31,6 +32,7 @@ export const Calendar: React.FC<CalendarProps> = ({
   columnWidth,
   fontFamily,
   fontSize,
+  showOnlyFirstLetters,
 }) => {
   const getCalendarValuesForYear = () => {
     const topValues: ReactChild[] = [];
@@ -83,6 +85,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     for (let i = 0; i < dateSetup.dates.length; i++) {
       const date = dateSetup.dates[i];
       const bottomValue = getLocaleMonth(date, locale);
+      const bottomValueText = getLocaleMonth(date, locale).toString().substring(0, 1);
       bottomValues.push(
         <text
           key={bottomValue + date.getFullYear()}
@@ -90,7 +93,7 @@ export const Calendar: React.FC<CalendarProps> = ({
           x={columnWidth * i + columnWidth * 0.5}
           className={styles.calendarBottomText}
         >
-          {bottomValue}
+          {showOnlyFirstLetters ? bottomValueText : bottomValue}
         </text>
       );
       if (

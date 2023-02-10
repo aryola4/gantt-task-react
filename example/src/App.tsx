@@ -18,7 +18,7 @@ const App = () => {
   const [view, setView] = React.useState<ViewMode>(ViewMode.Month);
   const [tasks, setTasks] = React.useState<Task[]>(initTasks());
   const [isChecked, setIsChecked] = React.useState(true);
-  let columnWidth = 50;
+  let columnWidth = 15;
   // if (view === ViewMode.Year) {
   //   columnWidth = 350;
   // } else if (view === ViewMode.Month) {
@@ -98,7 +98,8 @@ const App = () => {
         columnList={COLUMNLIST}
         showTaskName={false}
         preStepsCount={0}
-        fontSize={"11"}
+        fontSize={"8"}
+        showOnlyFirstLetters={true}
       />
       <h3>Gantt With Limited Height</h3>
       <Gantt

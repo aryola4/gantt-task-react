@@ -102,6 +102,7 @@ export interface DisplayOption {
   locale?: string;
   rtl?: boolean;
   showTaskName?: boolean;
+  showOnlyFirstLetters?: boolean;
 }
 
 export interface StylingOption {

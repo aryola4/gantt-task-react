@@ -82,6 +82,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   TaskListHeader = TaskListHeaderDefault,
   TaskListTable = TaskListTableDefault,
   columnList = COLUMNLIST,
+  showOnlyFirstLetters = false,
   onDateChange,
   onProgressChange,
   onDoubleClick,
@@ -453,6 +454,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     fontFamily,
     fontSize,
     rtl,
+    showOnlyFirstLetters,
   };
   const barProps: TaskGanttContentProps = {
     tasks: barTasks,
