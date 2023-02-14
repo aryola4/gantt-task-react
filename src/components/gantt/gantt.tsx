@@ -83,7 +83,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   TaskListTable = TaskListTableDefault,
   columnList = COLUMNLIST,
   showOnlyFirstLetters = false,
-  dateInterval = [],
+  dateInterval,
   onDateChange,
   onProgressChange,
   onDoubleClick,
