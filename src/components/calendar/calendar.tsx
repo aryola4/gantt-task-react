@@ -137,7 +137,8 @@ export const Calendar: React.FC<CalendarProps> = ({
       }
       let bottomValue = "S" + semesterCount.toString();
 
-      if (date.getMonth() >= 6) {
+      if (date.getMonth() >= 5) {
+        // Months in JS are 0 based so, the mid year is the 5th month
         bottomValue = "S2";
       }
 

@@ -76,7 +76,6 @@ export const ganttDateRange = (
   dateInterval?: Date[],
 ) => {
   // let dateInterval = [new Date(2015, 1, 1), new Date(2030, 12, 31)];
-  console.log("DATEINTERVAL: ", dateInterval);
   if (dateInterval && dateInterval.length === 2) {
     let newStartDate = new Date(dateInterval[0],);
     let newEndDate = new Date(dateInterval[1]);
