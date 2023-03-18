@@ -130,17 +130,8 @@ export const Calendar: React.FC<CalendarProps> = ({
     let semesterCount: number = 1;
     for (let i = 0; i < dateSetup.dates.length; i++) {
       const date = dateSetup.dates[i];
-      if (i !== 0 && dateSetup.dates[i].getFullYear() === dateSetup.dates[i - 1].getFullYear()) {
-        semesterCount++;
-      } else {
-        semesterCount = 1;
-      }
+      semesterCount = Math.trunc((date.getMonth() + 1) / 6) + 1
       let bottomValue = "S" + semesterCount.toString();
-
-      if (date.getMonth() >= 5) {
-        // Months in JS are 0 based so, the mid year is the 5th month
-        bottomValue = "S2";
-      }
 
       bottomValues.push(
         <text

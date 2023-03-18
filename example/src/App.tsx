@@ -28,7 +28,6 @@ const App = () => {
   }
 
   const handleTaskChange = (task: Task) => {
-    console.log("On date change Id:" + task.id);
     let newTasks = tasks.map(t => (t.id === task.id ? task : t));
     if (task.project) {
       const [start, end] = getStartEndDateForProject(newTasks, task.project);
@@ -97,11 +96,11 @@ const App = () => {
         columnWidth={columnWidth}
         columnList={COLUMNLIST}
         showTaskName={false}
-        preStepsCount={0}
+        preStepsCount={1}
         // fontSize={"8"}
         // showOnlyFirstLetters={true}
       />
-      <h3>Gantt With Limited Height</h3>
+      {/* <h3>Gantt With Limited Height</h3>
       <Gantt
         tasks={tasks}
         viewMode={view}
@@ -116,7 +115,7 @@ const App = () => {
         ganttHeight={100}
         columnWidth={columnWidth}
         columnList={COLUMNLIST}
-      />
+      /> */}
     </div>
   );
 };
