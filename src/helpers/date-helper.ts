@@ -107,19 +107,24 @@ export const ganttDateRange = (
       break;
     case ViewMode.Semester:
       newStartDate = startOfDate(newStartDate, "month");
-      const month = newStartDate.getMonth()
+      let month = newStartDate.getMonth()
       newStartDate = new Date(newStartDate.getFullYear(), Math.floor((month + 1)/6) * 6, newStartDate.getDate())
       newStartDate = addToDate(newStartDate, -6 * preStepsCount, "month");
+      newEndDate = startOfDate(newEndDate, "month");
+      month = newEndDate.getMonth()
+      newEndDate = new Date(newEndDate.getFullYear(), Math.floor((month + 1)/6) * 6, newEndDate.getDate())
       newEndDate = addToDate(newEndDate, 6, "month");
-      newEndDate = startOfDate(newEndDate, "year");
+      console.log(newStartDate, newEndDate)
       break;
     case ViewMode.Trimester:
       newStartDate = startOfDate(newStartDate, "month");
       let triMonth = newStartDate.getMonth()
       newStartDate = new Date(newStartDate.getFullYear(), Math.floor((triMonth + 1)/3) * 3, newStartDate.getDate())
       newStartDate = addToDate(newStartDate, -3 * preStepsCount, "month");
+      newEndDate = startOfDate(newEndDate, "month");
+      triMonth = newEndDate.getMonth()
+      newEndDate = new Date(newEndDate.getFullYear(), Math.floor((triMonth + 1)/3) * 3, newEndDate.getDate())
       newEndDate = addToDate(newEndDate, 3, "month");
-      newEndDate = startOfDate(newEndDate, "year");
       break;
     case ViewMode.Week:
       newStartDate = startOfDate(newStartDate, "day");
