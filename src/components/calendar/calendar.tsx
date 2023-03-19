@@ -148,7 +148,9 @@ export const Calendar: React.FC<CalendarProps> = ({
         i === 0 ||
         date.getFullYear() !== dateSetup.dates[i - 1].getFullYear()
       ) {
-        const topValue = date.getFullYear().toString();
+        const dateYear = date.getFullYear()
+        const currentDateYear = (new Date()).getFullYear()
+        const topValue = dateYear === currentDateYear ? dateYear.toString() : ""
         let xText = columnWidth * i + columnWidth;
         if (date.getMonth() >= 6) {
           xText = columnWidth * i + columnWidth * 0.5;
@@ -210,7 +212,9 @@ export const Calendar: React.FC<CalendarProps> = ({
         i === 0 ||
         date.getFullYear() !== dateSetup.dates[i - 1].getFullYear()
       ) {
-        const topValue = date.getFullYear().toString();
+        const dateYear = date.getFullYear()
+        const currentDateYear = (new Date()).getFullYear()
+        const topValue = dateYear === currentDateYear ? dateYear.toString() : ""
         // let xText: number;
         // if (rtl) {
         //   xText = (6 + i + date.getMonth() + 1) * columnWidth;
