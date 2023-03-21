@@ -48,7 +48,7 @@ export interface Task {
   createdBy?: string;
   isCompleted?: boolean;
   childrenCount?: number;
-  
+  beneficiaire?: string;
 }
 
 export interface EventOption {
