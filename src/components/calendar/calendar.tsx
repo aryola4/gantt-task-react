@@ -82,16 +82,22 @@ export const Calendar: React.FC<CalendarProps> = ({
     const topValues: ReactChild[] = [];
     const bottomValues: ReactChild[] = [];
     const topDefaultHeight = headerHeight * 0.5;
+    const currentYear = (new Date()).getFullYear()
     for (let i = 0; i < dateSetup.dates.length; i++) {
       const date = dateSetup.dates[i];
       const bottomValue = getLocaleMonth(date, locale);
       const bottomValueText = getLocaleMonth(date, locale).toString().substring(0, 1);
+
+      let className = styles.calendarBottomText
+      if (currentYear == date.getFullYear()) {
+        className += " " + styles.currentYearBottomText
+      }
       bottomValues.push(
         <text
           key={bottomValue + date.getFullYear()}
           y={headerHeight * 0.8}
           x={columnWidth * i + columnWidth * 0.5}
-          className={styles.calendarBottomText}
+          className={className}
         >
           {showOnlyFirstLetters ? bottomValueText : bottomValue}
         </text>
@@ -128,17 +134,22 @@ export const Calendar: React.FC<CalendarProps> = ({
     const bottomValues: ReactChild[] = [];
     const topDefaultHeight = headerHeight * 0.5;
     let semesterCount: number = 1;
+    const currentYear = (new Date()).getFullYear()
     for (let i = 0; i < dateSetup.dates.length; i++) {
       const date = dateSetup.dates[i];
       semesterCount = Math.trunc((date.getMonth() + 1) / 6) + 1
       let bottomValue = "S" + semesterCount.toString();
 
+      let className = styles.calendarBottomText
+      if (currentYear == date.getFullYear()) {
+        className += " " + styles.currentYearBottomText
+      }
       bottomValues.push(
         <text
           key={bottomValue + date.getFullYear()}
           y={headerHeight * 0.8}
           x={columnWidth * i + columnWidth * 0.5}
-          className={styles.calendarBottomText}
+          className={className}
         >
           {bottomValue}
         </text>
@@ -164,7 +175,7 @@ export const Calendar: React.FC<CalendarProps> = ({
             y2Line={topDefaultHeight}
             xText={xText}
             yText={topDefaultHeight * 0.9}
-            isEven={topValues.length%2 === 0}
+            isEven={topValues.length % 2 === 0}
           />
         );
         semesterCount = 1;
@@ -178,6 +189,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     const bottomValues: ReactChild[] = [];
     const topDefaultHeight = headerHeight * 0.5;
     let semesterCount = 1;
+    const currentYear = (new Date()).getFullYear()
     for (let i = 0; i < dateSetup.dates.length; i++) {
       const date = dateSetup.dates[i];
       // const bottomValue = getLocaleMonth(date, locale);
@@ -189,21 +201,24 @@ export const Calendar: React.FC<CalendarProps> = ({
 
       if (date.getMonth() >= 3 && date.getMonth() < 6) {
         semesterCount = 2;
-      } else if (date.getMonth() >= 6 && date.getMonth() < 9){
+      } else if (date.getMonth() >= 6 && date.getMonth() < 9) {
         semesterCount = 3;
-      } else if(date.getMonth() >= 9){
+      } else if (date.getMonth() >= 9) {
         semesterCount = 4;
       }
 
       let bottomValue = "T" + (semesterCount).toString();
 
-
+      let className = styles.calendarBottomText
+      if (currentYear == date.getFullYear()) {
+        className += " " + styles.currentYearBottomText
+      }
       bottomValues.push(
         <text
           key={bottomValue + date.getFullYear()}
           y={headerHeight * 0.8}
           x={columnWidth * i + columnWidth * 0.5}
-          className={styles.calendarBottomText}
+          className={className}
         >
           {bottomValue}
         </text>
@@ -245,7 +260,7 @@ export const Calendar: React.FC<CalendarProps> = ({
             y2Line={topDefaultHeight}
             xText={xText}
             yText={topDefaultHeight * 0.9}
-            isEven={topValues.length%2 === 0}
+            isEven={topValues.length % 2 === 0}
 
           />
         );

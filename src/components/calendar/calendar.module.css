@@ -9,6 +9,11 @@
   pointer-events: none;
 }
 
+.currentYearBottomText {
+  fill:rgb(17, 63, 200);
+  font-weight: bold;
+}
+
 .calendarTopTick {
   stroke: #e6e4e4;
 }
