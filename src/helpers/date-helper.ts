@@ -72,8 +72,16 @@ export const startOfDate = (date: Date, scale: DateHelperScales) => {
 export const ganttDateRange = (
   tasks: Task[],
   viewMode: ViewMode,
-  preStepsCount: number
+  preStepsCount: number,
+  dateInterval?: Date[],
 ) => {
+  // let dateInterval = [new Date(2015, 1, 1), new Date(2030, 12, 31)];
+  if (dateInterval && dateInterval.length === 2) {
+    let newStartDate = new Date(dateInterval[0],);
+    let newEndDate = new Date(dateInterval[1]);
+    return [newStartDate, newEndDate];
+  };
+
   let newStartDate: Date = tasks[0].start;
   let newEndDate: Date = tasks[0].start;
   for (const task of tasks) {
@@ -86,7 +94,7 @@ export const ganttDateRange = (
   }
   switch (viewMode) {
     case ViewMode.Year:
-      newStartDate = addToDate(newStartDate, -1, "year");
+      newStartDate = addToDate(newStartDate, -1 * preStepsCount, "year");
       newStartDate = startOfDate(newStartDate, "year");
       newEndDate = addToDate(newEndDate, 1, "year");
       newEndDate = startOfDate(newEndDate, "year");
@@ -96,6 +104,27 @@ export const ganttDateRange = (
       newStartDate = startOfDate(newStartDate, "month");
       newEndDate = addToDate(newEndDate, 1, "year");
       newEndDate = startOfDate(newEndDate, "year");
+      break;
+    case ViewMode.Semester:
+      newStartDate = startOfDate(newStartDate, "month");
+      let month = newStartDate.getMonth()
+      newStartDate = new Date(newStartDate.getFullYear(), Math.floor(month/6) * 6, newStartDate.getDate())
+      newStartDate = addToDate(newStartDate, -6 * preStepsCount, "month");
+      newEndDate = startOfDate(newEndDate, "month");
+      month = newEndDate.getMonth()
+      newEndDate = new Date(newEndDate.getFullYear(), Math.floor(month/6) * 6, newEndDate.getDate())
+      console.log(newEndDate, month)
+      newEndDate = addToDate(newEndDate, 6, "month");
+      break;
+    case ViewMode.Trimester:
+      newStartDate = startOfDate(newStartDate, "month");
+      let triMonth = newStartDate.getMonth()
+      newStartDate = new Date(newStartDate.getFullYear(), Math.floor(triMonth/3) * 3, newStartDate.getDate())
+      newStartDate = addToDate(newStartDate, -3 * preStepsCount, "month");
+      newEndDate = startOfDate(newEndDate, "month");
+      triMonth = newEndDate.getMonth()
+      newEndDate = new Date(newEndDate.getFullYear(), Math.floor(triMonth/3) * 3, newEndDate.getDate())
+      newEndDate = addToDate(newEndDate, 3, "month");
       break;
     case ViewMode.Week:
       newStartDate = startOfDate(newStartDate, "day");
@@ -132,13 +161,15 @@ export const ganttDateRange = (
       newEndDate = addToDate(newEndDate, 1, "day");
       break;
   }
+  console.log(newStartDate, newEndDate)
   return [newStartDate, newEndDate];
 };
 
 export const seedDates = (
   startDate: Date,
   endDate: Date,
-  viewMode: ViewMode
+  viewMode: ViewMode,
+  // postStepsCount: number = -1,
 ) => {
   let currentDate: Date = new Date(startDate);
   const dates: Date[] = [currentDate];
@@ -149,6 +180,12 @@ export const seedDates = (
         break;
       case ViewMode.Month:
         currentDate = addToDate(currentDate, 1, "month");
+        break;
+      case ViewMode.Semester:
+        currentDate = addToDate(currentDate, 6, "month");
+        break;
+      case ViewMode.Trimester:
+        currentDate = addToDate(currentDate, 3, "month");
         break;
       case ViewMode.Week:
         currentDate = addToDate(currentDate, 7, "day");
@@ -168,6 +205,66 @@ export const seedDates = (
     }
     dates.push(currentDate);
   }
+
+  // while (currentDate <= endDate) {
+  //   switch (viewMode) {
+  //     case ViewMode.Year:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 1;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "year");
+  //       break;
+  //     case ViewMode.Month:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 1;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "month");
+  //       break;
+  //     case ViewMode.Semester:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 6;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "month");
+  //       break;
+  //     case ViewMode.Trimester:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 3;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "month");
+  //       break;
+  //     case ViewMode.Week:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 7;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "day");
+  //       break;
+  //     case ViewMode.Day:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 1;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "day");
+  //       break;
+  //     case ViewMode.HalfDay:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 12;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "hour");
+  //       break;
+  //     case ViewMode.QuarterDay:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 6;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "hour");
+  //       break;
+  //     case ViewMode.Hour:
+  //       if(postStepsCount === -1){
+  //         postStepsCount = 1;
+  //       }
+  //       currentDate = addToDate(currentDate, postStepsCount, "hour");
+  //       break;
+  //   }
+  //   dates.push(currentDate);
+  // }
   return dates;
 };
 

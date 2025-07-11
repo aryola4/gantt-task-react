@@ -9,13 +9,40 @@
   pointer-events: none;
 }
 
+.currentYearBottomText {
+  fill:rgb(17, 63, 200);
+  font-weight: bold;
+}
+
 .calendarTopTick {
   stroke: #e6e4e4;
 }
 
 .calendarTopText {
   text-anchor: middle;
-  fill: #555;
+  fill: rgb(17, 63, 200);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.calendarEvenTopText {
+  text-anchor: middle;
+  fill: rgb(17, 63, 200);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.calendarOddTopText {
+  text-anchor: middle;
+  fill: rgb(160, 116, 53);
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -28,4 +55,12 @@
   fill: #ffffff;
   stroke: #e0e0e0;
   stroke-width: 1.4;
+}
+
+.topPartEvenText {
+  color: #393030;
+}
+
+.topPartOddText {
+  color: #ad28b9;
 }

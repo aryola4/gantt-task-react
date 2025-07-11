@@ -1,12 +1,21 @@
 import React from "react";
-import { Task, ViewMode, Gantt } from "gantt-task-react";
+import { Task, ViewMode, Gantt, ColumnVisibility } from "gantt-task-react";
 import { ViewSwitcher } from "./components/view-switcher";
 import { getStartEndDateForProject, initTasks } from "./helper";
 import "gantt-task-react/dist/index.css";
 
+
+const COLUMNLIST: ColumnVisibility[] = [
+  { columnName: 'Code', isVisible: true, columnWithArrow: true, toShow: (task:Task) => {return task.id} },
+  { columnName: 'Nom', isVisible: true, toShow: (task:Task) => {return task.name} },
+  { columnName: 'Début', isVisible: true, isDate:true, toShow: (task:Task) => {return task.start} },
+  { columnName: 'Fin', isVisible: true, isDate:true, toShow: (task:Task) => {return task.end} },
+  { columnName: 'Assigné à', isVisible: true, toShow: (task:Task) => {return task.assignedUser} },
+];
+
 // Init
 const App = () => {
-  const [view, setView] = React.useState<ViewMode>(ViewMode.Day);
+  const [view, setView] = React.useState<ViewMode>(ViewMode.Month);
   const [tasks, setTasks] = React.useState<Task[]>(initTasks());
   const [isChecked, setIsChecked] = React.useState(true);
   let columnWidth = 65;
@@ -19,7 +28,6 @@ const App = () => {
   }
 
   const handleTaskChange = (task: Task) => {
-    console.log("On date change Id:" + task.id);
     let newTasks = tasks.map(t => (t.id === task.id ? task : t));
     if (task.project) {
       const [start, end] = getStartEndDateForProject(newTasks, task.project);
@@ -64,7 +72,6 @@ const App = () => {
 
   const handleExpanderClick = (task: Task) => {
     setTasks(tasks.map(t => (t.id === task.id ? task : t)));
-    console.log("On expander click Id:" + task.id);
   };
 
   return (
@@ -87,8 +94,13 @@ const App = () => {
         onExpanderClick={handleExpanderClick}
         listCellWidth={isChecked ? "155px" : ""}
         columnWidth={columnWidth}
+        columnList={COLUMNLIST}
+        showTaskName={false}
+        preStepsCount={1}
+        // fontSize={"8"}
+        // showOnlyFirstLetters={true}
       />
-      <h3>Gantt With Limited Height</h3>
+      {/* <h3>Gantt With Limited Height</h3>
       <Gantt
         tasks={tasks}
         viewMode={view}
@@ -100,9 +112,10 @@ const App = () => {
         onSelect={handleSelect}
         onExpanderClick={handleExpanderClick}
         listCellWidth={isChecked ? "155px" : ""}
-        ganttHeight={300}
+        ganttHeight={100}
         columnWidth={columnWidth}
-      />
+        columnList={COLUMNLIST}
+      /> */}
     </div>
   );
 };

@@ -20,6 +20,7 @@ export type CalendarProps = {
   columnWidth: number;
   fontFamily: string;
   fontSize: string;
+  showOnlyFirstLetters: boolean;
 };
 
 export const Calendar: React.FC<CalendarProps> = ({
@@ -31,6 +32,7 @@ export const Calendar: React.FC<CalendarProps> = ({
   columnWidth,
   fontFamily,
   fontSize,
+  showOnlyFirstLetters,
 }) => {
   const getCalendarValuesForYear = () => {
     const topValues: ReactChild[] = [];
@@ -80,17 +82,24 @@ export const Calendar: React.FC<CalendarProps> = ({
     const topValues: ReactChild[] = [];
     const bottomValues: ReactChild[] = [];
     const topDefaultHeight = headerHeight * 0.5;
+    const currentYear = (new Date()).getFullYear()
     for (let i = 0; i < dateSetup.dates.length; i++) {
       const date = dateSetup.dates[i];
       const bottomValue = getLocaleMonth(date, locale);
+      const bottomValueText = getLocaleMonth(date, locale).toString().substring(0, 1);
+
+      let className = styles.calendarBottomText
+      if (currentYear == date.getFullYear()) {
+        className += " " + styles.currentYearBottomText
+      }
       bottomValues.push(
         <text
           key={bottomValue + date.getFullYear()}
           y={headerHeight * 0.8}
           x={columnWidth * i + columnWidth * 0.5}
-          className={styles.calendarBottomText}
+          className={className}
         >
-          {bottomValue}
+          {showOnlyFirstLetters ? bottomValueText : bottomValue}
         </text>
       );
       if (
@@ -113,6 +122,146 @@ export const Calendar: React.FC<CalendarProps> = ({
             y2Line={topDefaultHeight}
             xText={xText}
             yText={topDefaultHeight * 0.9}
+          />
+        );
+      }
+    }
+    return [topValues, bottomValues];
+  };
+
+  const getCalendarValuesForSemester = () => {
+    const topValues: ReactChild[] = [];
+    const bottomValues: ReactChild[] = [];
+    const topDefaultHeight = headerHeight * 0.5;
+    let semesterCount: number = 1;
+    const currentYear = (new Date()).getFullYear()
+    for (let i = 0; i < dateSetup.dates.length; i++) {
+      const date = dateSetup.dates[i];
+      semesterCount = Math.trunc((date.getMonth() + 1) / 6) + 1
+      let bottomValue = "S" + semesterCount.toString();
+
+      let className = styles.calendarBottomText
+      if (currentYear == date.getFullYear()) {
+        className += " " + styles.currentYearBottomText
+      }
+      bottomValues.push(
+        <text
+          key={bottomValue + date.getFullYear()}
+          y={headerHeight * 0.8}
+          x={columnWidth * i + columnWidth * 0.5}
+          className={className}
+        >
+          {bottomValue}
+        </text>
+      );
+
+      if (
+        i === 0 ||
+        date.getFullYear() !== dateSetup.dates[i - 1].getFullYear()
+      ) {
+        const dateYear = date.getFullYear()
+        const currentDateYear = (new Date()).getFullYear()
+        const topValue = dateYear === currentDateYear ? dateYear.toString() : ""
+        let xText = columnWidth * i + columnWidth;
+        if (date.getMonth() >= 6) {
+          xText = columnWidth * i + columnWidth * 0.5;
+        }
+        topValues.push(
+          <TopPartOfCalendar
+            key={topValue}
+            value={topValue}
+            x1Line={columnWidth * i}
+            y1Line={0}
+            y2Line={topDefaultHeight}
+            xText={xText}
+            yText={topDefaultHeight * 0.9}
+            isEven={topValues.length % 2 === 0}
+          />
+        );
+        semesterCount = 1;
+      }
+    }
+    return [topValues, bottomValues];
+  };
+
+  const getCalendarValuesForTrimester = () => {
+    const topValues: ReactChild[] = [];
+    const bottomValues: ReactChild[] = [];
+    const topDefaultHeight = headerHeight * 0.5;
+    let semesterCount = 1;
+    const currentYear = (new Date()).getFullYear()
+    for (let i = 0; i < dateSetup.dates.length; i++) {
+      const date = dateSetup.dates[i];
+      // const bottomValue = getLocaleMonth(date, locale);
+      if (i !== 0 && dateSetup.dates[i].getFullYear() === dateSetup.dates[i - 1].getFullYear()) {
+        semesterCount++;
+      } else {
+        semesterCount = 1;
+      }
+
+      if (date.getMonth() >= 3 && date.getMonth() < 6) {
+        semesterCount = 2;
+      } else if (date.getMonth() >= 6 && date.getMonth() < 9) {
+        semesterCount = 3;
+      } else if (date.getMonth() >= 9) {
+        semesterCount = 4;
+      }
+
+      let bottomValue = "T" + (semesterCount).toString();
+
+      let className = styles.calendarBottomText
+      if (currentYear == date.getFullYear()) {
+        className += " " + styles.currentYearBottomText
+      }
+      bottomValues.push(
+        <text
+          key={bottomValue + date.getFullYear()}
+          y={headerHeight * 0.8}
+          x={columnWidth * i + columnWidth * 0.5}
+          className={className}
+        >
+          {bottomValue}
+        </text>
+      );
+      if (
+        i === 0 ||
+        date.getFullYear() !== dateSetup.dates[i - 1].getFullYear()
+      ) {
+        const dateYear = date.getFullYear()
+        const currentDateYear = (new Date()).getFullYear()
+        const topValue = dateYear === currentDateYear ? dateYear.toString() : ""
+        // let xText: number;
+        // if (rtl) {
+        //   xText = (6 + i + date.getMonth() + 1) * columnWidth;
+        // } else {
+        //   xText = (6 + i - date.getMonth()) * columnWidth;
+        // }
+        let xText = columnWidth * i + columnWidth * 2;
+        // if(date.getMonth() > 3 && date.getMonth() < 6 ){
+        //   xText = columnWidth * i;
+        // } else if (date.getMonth() >= 6 && date.getMonth() < 9){
+        //   xText = columnWidth * i;
+        // } else if(date.getMonth() >= 9){
+        //   xText = columnWidth * i;
+        // }
+        if (date.getMonth() > 3) {
+          xText = columnWidth * i + columnWidth * 1;
+        } else if (date.getMonth() > 6) {
+          xText = columnWidth * i + columnWidth * 1;
+        } else if (date.getMonth() > 9) {
+          xText = columnWidth * i + columnWidth * 1;
+        }
+        topValues.push(
+          <TopPartOfCalendar
+            key={topValue}
+            value={topValue}
+            x1Line={columnWidth * i}
+            y1Line={0}
+            y2Line={topDefaultHeight}
+            xText={xText}
+            yText={topDefaultHeight * 0.9}
+            isEven={topValues.length % 2 === 0}
+
           />
         );
       }
@@ -206,8 +355,8 @@ export const Calendar: React.FC<CalendarProps> = ({
             xText={
               columnWidth * (i + 1) -
               getDaysInMonth(date.getMonth(), date.getFullYear()) *
-                columnWidth *
-                0.5
+              columnWidth *
+              0.5
             }
             yText={topDefaultHeight * 0.9}
           />
@@ -312,14 +461,22 @@ export const Calendar: React.FC<CalendarProps> = ({
 
   let topValues: ReactChild[] = [];
   let bottomValues: ReactChild[] = [];
+
   switch (dateSetup.viewMode) {
+
     case ViewMode.Year:
       [topValues, bottomValues] = getCalendarValuesForYear();
       break;
     case ViewMode.Month:
-        [topValues, bottomValues] = getCalendarValuesForMonth();
-        break;
-      case ViewMode.Week:
+      [topValues, bottomValues] = getCalendarValuesForMonth();
+      break;
+    case ViewMode.Semester:
+      [topValues, bottomValues] = getCalendarValuesForSemester();
+      break;
+    case ViewMode.Trimester:
+      [topValues, bottomValues] = getCalendarValuesForTrimester();
+      break;
+    case ViewMode.Week:
       [topValues, bottomValues] = getCalendarValuesForWeek();
       break;
     case ViewMode.Day:
@@ -332,6 +489,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     case ViewMode.Hour:
       [topValues, bottomValues] = getCalendarValuesForHour();
   }
+
   return (
     <g className="calendar" fontSize={fontSize} fontFamily={fontFamily}>
       <rect

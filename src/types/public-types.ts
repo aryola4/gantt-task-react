@@ -7,14 +7,20 @@ export enum ViewMode {
   Week = "Week",
   Month = "Month",
   Year = "Year",
+  Semester = "Semester",
+  Trimester = "Trimester",
+  
 }
-export type TaskType = "task" | "milestone" | "project";
+
+export type TaskType = "task" | "milestone" | "project" | "Composante" | "Sous composante" | "Volet" | "Activité";
 export interface Task {
   id: string;
   type: TaskType;
   name: string;
   start: Date;
   end: Date;
+  startToDisplay?: Date;
+  endToDisplay?: Date;
   /**
    * From 0 to 100
    */
@@ -30,8 +36,19 @@ export interface Task {
   dependencies?: string[];
   hideChildren?: boolean;
   displayOrder?: number;
-  assignedUser?:string;
-  description?:string;
+  assignedUser?: string;
+  approver?: string;
+  informed?: string;
+  duration?: number;
+  description?: string;
+  parent?: string;
+  estimatedAmount?: number;
+  spentAmount?: number;
+  code?: string;
+  createdBy?: string;
+  isCompleted?: boolean;
+  childrenCount?: number;
+  beneficiaire?: string;
 }
 
 export interface EventOption {
@@ -84,6 +101,9 @@ export interface DisplayOption {
    */
   locale?: string;
   rtl?: boolean;
+  showTaskName?: boolean;
+  showOnlyFirstLetters?: boolean;
+  dateInterval?: Date[];
 }
 
 export interface StylingOption {
@@ -111,6 +131,20 @@ export interface StylingOption {
   projectBackgroundSelectedColor?: string;
   milestoneBackgroundColor?: string;
   milestoneBackgroundSelectedColor?: string;
+
+  componentBackgroundColor?: string,
+  componentBackgroundSelectedColor?: string,
+
+  subcomponentBackgroundColor?: string,
+  subcomponentBackgroundSelectedColor?: string,
+
+  phaseBackgroundColor?: string,
+  phaseBackgroundSelectedColor?: string,
+
+  activityBackgroundColor?: string,
+  activityBackgroundSelectedColor?: string,
+
+
   arrowColor?: string;
   arrowIndent?: number;
   todayColor?: string;
@@ -141,6 +175,15 @@ export interface StylingOption {
   }>;
 }
 
+export type ColumnVisibility = {
+  columnName: string;
+  isVisible: boolean;
+  isDate?: boolean;
+  readonly toShow:(task: Task) => string | undefined | Date;
+  columnWithArrow?: boolean;
+};
+
 export interface GanttProps extends EventOption, DisplayOption, StylingOption {
   tasks: Task[];
+  columnList: ColumnVisibility[];
 }
